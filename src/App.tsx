@@ -1,7 +1,13 @@
+import { useGetStatusPage } from "./hooks";
+
 function App() {
+  const { responses, isLoading } = useGetStatusPage()
+
+  if (isLoading) return <p>Loading...</p>
+
   return (
     <div className="App">
-      <h1>hello world!</h1>
+      <p>{JSON.stringify(responses)}</p>
     </div>
   );
 }
