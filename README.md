@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# FactoryFour Frontend Dev Take-Home Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objective
 
-## Available Scripts
+Write a status page for the FactoryFour APIs, which should be a single-page web application using React in either TypeScript or JavaScript.
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+- **Framework**: React (TypeScript or JavaScript)
+- **HTTP Requests**: Any HTTP library (e.g., Axios, Fetch API)
+- **Styling**: CSS, SASS, or any CSS-in-JS library (optional)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Details
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **API Health Status**: Each FactoryFour API has a health status endpoint accessible publicly without authentication.
+- **Endpoint Response**: On a successful request, each endpoint returns:
+  - `success`: boolean
+  - `message`: string
+  - `hostname`: string
+  - `time`: number
+- **Polling Interval**: The page should request the health status of each API every 15 seconds, displaying the most recent result for each API.
+- **Endpoints Format**: `https://api.factoryfour.com/API_NAME/health/status` where `API_NAME` includes `accounts`, `assets`, `customers`, `datapoints`, `devices`, `documents`, `forms`, `invites`, `media`, `messages`, `namespaces`, `orders`, `patients`, `relationships`, `rules`, `templates`, `users`, `workflows`.
+- **Error Handling**: One of the APIs is deprecated and always returns a 503 error. This should be displayed as a real outage.
+- **Hostname Changes**: The hostname string returned by the API is partially random and new for each call. Display the most recent hostname.
 
-### `npm test`
+## Design Concerns
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Simplicity and Legibility**: The design should be straightforward and easy to read and understand. The focus is on functionality and clarity rather than branding.
+- **Code Readability**: The codebase should be easily understandable and modifiable. For example, changing the 15-second interval to 10 seconds should be straightforward for someone with limited JS knowledge.
 
-### `npm run build`
+## Resources
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Getting Started**: Utilize `create-react-app` for easy setup. [React Documentation](https://reactjs.org/docs/create-a-new-react-app.html)
+- **Example Page**: For reference, check [this example page](https://jthai006.github.io/FactoryFour/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running the Project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+  ``git clone https://github.com/Dougsrodrigues/factory-four.git``
 
-### `npm run eject`
+2. Navigate to the project directory:
+``cd factory-four``
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Install dependencies:
+``yarn install``
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Start the development server:
+``yarn start``
