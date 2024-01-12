@@ -6,9 +6,9 @@ Write a status page for the FactoryFour APIs, which should be a single-page web 
 
 ## Stack
 
-- **Framework**: React (TypeScript or JavaScript)
-- **HTTP Requests**: Any HTTP library (e.g., Axios, Fetch API)
-- **Styling**: CSS, SASS, or any CSS-in-JS library (optional)
+- **Framework**: React (TypeScript)
+- **HTTP Requests**: Axios
+- **Styling**: Styled-components
 
 ## Details
 
