@@ -1,14 +1,15 @@
-import { useGetStatusPage } from "./hooks";
+
+import { Header } from "./components";
+import { StatusServicesPage } from "./pages";
+import GlobalStyles from "./styles/global";
 
 function App() {
-  const { responses, isLoading } = useGetStatusPage()
-
-  if (isLoading) return <p>Loading...</p>
-
   return (
-    <div className="App">
-      <p>{JSON.stringify(responses)}</p>
-    </div>
+    <>
+      <Header />
+      <StatusServicesPage />
+      <GlobalStyles />
+    </>
   );
 }
 

@@ -2,53 +2,52 @@ import { useEffect, useState } from "react";
 import { statusService } from "../services/statusService";
 import { type IStatusAPIResponse } from "../utils";
 
-interface IResponses extends IStatusAPIResponse {
+export interface IServicesStatus extends IStatusAPIResponse {
   status: number;
   apiName: string;
 }
+const apiNames = [
+  'accounts',
+  'assets',
+  'customers',
+  'datapoints',
+  'devices',
+  'documents',
+  'forms',
+  'invites',
+  'media',
+  'messages',
+  'namespaces',
+  'orders',
+  'patients',
+  'relationships',
+  'rules',
+  'templates',
+  'users',
+  'workflows'
+];
 
 export const useGetStatusPage = () => {
-  const [responses, setResponses] = useState([] as IResponses[])
-  const [isLoading, setIsLoading] = useState(false)
-
-  const apiNames = [
-    'accounts',
-    'assets',
-    'customers',
-    'datapoints',
-    'devices',
-    'documents',
-    'forms',
-    'invites',
-    'media',
-    'messages',
-    'namespaces',
-    'orders',
-    'patients',
-    'relationships',
-    'rules',
-    'templates',
-    'users',
-    'workflows'
-  ];
+  const [servicesStatus, setServicesStatus] = useState([] as IServicesStatus[])
+  const [isLoadingRequest, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchApiStatus = async () => {
-      const responsesApi = [] as IResponses[]
+      const responsesApi = [] as IServicesStatus[]
       setIsLoading(true)
       for (const apiName of apiNames) {
         try {
-          const response = await statusService.getStatusApis(apiName);
+          const { data, status } = await statusService.getStatusApis(apiName);
           responsesApi.push({
-            ...response,
+            ...data,
             apiName,
-            status: 200
+            status
           });
         } catch (error: any) {
           responsesApi.push({
             apiName,
-            hostname: 'OUTAGE',
-            message: 'Error',
+            hostname: error.name,
+            message: error.message,
             timeo: error.config.timeout,
             status: error.code,
             success: false
@@ -56,20 +55,19 @@ export const useGetStatusPage = () => {
         }
       }
       setIsLoading(false)
-      console.log(responsesApi)
-      setResponses(responsesApi)
+      setServicesStatus(responsesApi)
     };
 
     void fetchApiStatus();
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     const intervalId = setInterval(fetchApiStatus, 15000);
 
     return () => { clearInterval(intervalId); };
   }, [])
 
 
+  const isRefetching = isLoadingRequest && servicesStatus.length > 0
+  const isLoading = !isRefetching && isLoadingRequest
 
-
-  return { responses, isLoading }
+  return { servicesStatus, isLoading, isRefetching }
 }
