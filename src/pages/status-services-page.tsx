@@ -5,10 +5,14 @@ import { useGetStatusPage } from "../hooks"
 export const StatusServicesPage = () => {
   const { servicesStatus, isLoading, isRefetching } = useGetStatusPage()
 
-  if (isLoading) return <Center><p>Loading...</p></Center>
+  if (isLoading) return <Center><p
+    data-testid="loading-id"
+  >Loading...</p></Center>
 
   return (
-    <Container>
+    <Container
+      data-testid="container-id"
+    >
       {
         servicesStatus.map(service => <CardStatus key={service.apiName}
           serviceStatus={service}

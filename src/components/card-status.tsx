@@ -1,20 +1,25 @@
 import styled from "styled-components"
-import { type IServicesStatus } from "../hooks"
+import { IServicesStatus } from "../hooks"
 
 interface ICardStatusProps {
   serviceStatus: IServicesStatus,
   isRefetching: boolean
 }
 
+
 export const CardStatus = ({ serviceStatus, isRefetching }: ICardStatusProps) => {
+  if (Object.entries(serviceStatus).length === 0) return null
+
   return (
-    <Container>
+    <Container data-testid="card-status-id">
       <HeaderCard>
         <p>
           {serviceStatus.apiName}
         </p>
 
-        {isRefetching && <span>refetching...</span>}
+        {isRefetching && <span
+          data-testid="refetching-id"
+        >refetching...</span>}
       </HeaderCard>
 
       <Status
