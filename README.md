@@ -9,6 +9,7 @@ Write a status page for the FactoryFour APIs, which should be a single-page web 
 - **Framework**: React (TypeScript)
 - **HTTP Requests**: Axios
 - **Styling**: Styled-components
+- **Test**: Jest and React testing library
 
 ## Details
 
