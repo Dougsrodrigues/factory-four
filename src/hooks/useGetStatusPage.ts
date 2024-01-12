@@ -29,12 +29,12 @@ const apiNames = [
 
 export const useGetStatusPage = () => {
   const [servicesStatus, setServicesStatus] = useState([] as IServicesStatus[])
-  const [isLoadingRequest, setIsLoading] = useState(false)
+  const [isLoadingRequest, setIsLoadingRequest] = useState(false)
 
   useEffect(() => {
     const fetchApiStatus = async () => {
       const responsesApi = [] as IServicesStatus[]
-      setIsLoading(true)
+      setIsLoadingRequest(true)
       for (const apiName of apiNames) {
         try {
           const { data, status } = await statusService.getStatusApis(apiName);
@@ -54,7 +54,7 @@ export const useGetStatusPage = () => {
           });
         }
       }
-      setIsLoading(false)
+      setIsLoadingRequest(false)
       setServicesStatus(responsesApi)
     };
 
